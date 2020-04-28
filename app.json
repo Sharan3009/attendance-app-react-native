@@ -1,0 +1,17 @@
+{
+  "name": "attendance-app",
+  "displayName": "attendance-app",
+  "expo": {
+    "name": "attendance-app",
+    "slug": "attendance-app",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

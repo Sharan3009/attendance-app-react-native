@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
+import DateTimePicker from '@react-native-community/datetimepicker';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+        <DateTimePicker value={new Date()} mode="time" />
     </View>
   );
 }

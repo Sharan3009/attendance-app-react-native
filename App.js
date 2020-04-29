@@ -7,11 +7,21 @@
  */
 
 import React from 'react';
-import {View, Text} from 'react-native';
-const App = () => {
-  return (
-    <View><Text>This should work</Text></View>
-  );
+import DateTimePicker from '@react-native-community/datetimepicker';
+class App extends React.Component{
+  onChange = () =>{
+    //do nothing
+  }
+  render() {
+    return(
+      <DateTimePicker
+        value={new Date()}
+        mode={"time"}
+        display="default"
+        onChange={this.onChange}
+    />
+    );
+  };
 };
 
 export default App;

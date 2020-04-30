@@ -7,11 +7,31 @@
  */
 
 import React from 'react';
-import Navigation from './components/navigation';
+import TabNavigation from './components/tabNavigation';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import FirstPage from './components/firstPage';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
-  <Navigation />
+  <NavigationContainer>
+    <Stack.Navigator initialRouteName="Home"
+    screenOptions={{
+        headerStyle: {
+          backgroundColor: '#633689',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}>
+        <Stack.Screen name="Home" component={TabNavigation} />
+        <Stack.Screen name="Details" component={FirstPage} />
+      </Stack.Navigator>
+  </NavigationContainer>
   )
 }
 

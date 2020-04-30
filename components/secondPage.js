@@ -11,7 +11,7 @@ const SECTIONS = [
 class SecondPage extends React.Component {
 
     onUpdateSection = (i) =>{
-        this.props.navigation.push("HistoryDetails")
+        this.props.navigation.push("Details")
     }
 
     render(){

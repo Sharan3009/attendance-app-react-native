@@ -1,5 +1,6 @@
 import React from 'react';
 import Plank from './plank';
+import AddButton from './addButton';
 const SECTIONS = [
     {
       header: 'Sharandeep Singh',
@@ -49,8 +50,11 @@ class FirstPage extends React.Component {
 
     render(){
         return (
+            <>
             <Plank sections={SECTIONS}
             onUpdateSection={this.onUpdateSection}/>
+            <AddButton />
+            </>
         )
     }
 }

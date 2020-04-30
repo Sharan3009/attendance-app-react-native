@@ -29,7 +29,7 @@ const App = () => {
         },
       }}>
         <Stack.Screen name="Home" component={TabNavigation} />
-        <Stack.Screen name="Details" component={FirstPage} />
+        <Stack.Screen name="Details" component={FirstPage} options={({ route }) => ({ title: route.params.title })}/>
       </Stack.Navigator>
   </NavigationContainer>
   )

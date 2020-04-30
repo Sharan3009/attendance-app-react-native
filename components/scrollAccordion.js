@@ -1,8 +1,22 @@
 import React from 'react';
 import Accordion from 'react-native-collapsible/Accordion';
-import { View, Text, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
+const SECTIONS = [
+    {
+      name: 'Sharandeep Singh',
+      in: '2:45',
+      out: '3:45',
+      duration: '1 hour'
+    },
+    {
+        name: 'Bhopu Singh',
+        in: '9:45',
+        out: '6:45',
+        duration: '9 hours'
+    }
+  ];
 
-_renderHeader = section => {
+const _renderHeader = section => {
     return (
         <View style={{ paddingVertical:7, paddingHorizontal: 10, backgroundColor:'rgba(0,0,0,0.03)', borderBottomColor:'rgba(0,0,0,.125)', borderBottomWidth:1}}>
             <Text style={{fontSize:20}}>{section.name}</Text>
@@ -10,7 +24,7 @@ _renderHeader = section => {
     );
 };
 
-_renderContent = section => {
+const _renderContent = section => {
     return (
         <>
             <View style={{paddingVertical:7, paddingHorizontal: 14, flexDirection:'row'}}>
@@ -28,25 +42,20 @@ _renderContent = section => {
         </>
     );
 };
-
-const attendees = (props) =>{
-    return (
-        <TouchableWithoutFeedback onPress={props.onScrollViewPress}>
-            <View style={{flexGrow:1}}>
-                <ScrollView style={{flexGrow:1}}>
-                    <Accordion
-                        style={{overflow:"scroll"}}
-                        sections={props.sections}
-                        activeSections={props.activeSections}
-                        renderHeader={_renderHeader}
-                        renderContent={_renderContent}
-                        onChange={props.onUpdateSection}
-                        underlayColor="inherit"
-                    />
-                </ScrollView>
-            </View>
-        </TouchableWithoutFeedback>
+const scrollAccordion = (props) => {
+    return(
+        <ScrollView style={{flexGrow:1}}>
+            <Accordion
+                style={{overflow:"scroll"}}
+                sections={SECTIONS}
+                activeSections={props.activeSections}
+                renderHeader={_renderHeader}
+                renderContent={_renderContent}
+                onChange={props.onUpdateSection}
+                underlayColor="inherit"
+            />
+        </ScrollView>
     )
 }
 
-export default attendees;
+export default scrollAccordion;

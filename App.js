@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import Navigation from './containers/navigation';
+import Navigation from './components/navigation';
 
 const App = () => {
   return (

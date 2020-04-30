@@ -2,16 +2,44 @@ import React from 'react';
 import Plank from './plank';
 const SECTIONS = [
     {
-      name: 'Sharandeep Singh',
-      in: '2:45',
-      out: '3:45',
-      duration: '1 hour'
+      header: 'Sharandeep Singh',
+      content : [
+          {
+              id:"in",
+              key:"In",
+              value:"2:45"
+          },
+          {
+            id:"out",
+            key:"Out",
+            value:"3:45"
+        },
+        {
+            id:"duration",
+            key:"Duration",
+            value:"1 hour"
+        }
+      ]
     },
     {
-        name: 'Bhopu Singh',
-        in: '9:45',
-        out: '6:45',
-        duration: '9 hours'
+        header: 'Bhopu Singh',
+        content : [
+            {
+                id:"in",
+                key:"In",
+                value:"9:45"
+            },
+            {
+              id:"out",
+              key:"Out",
+              value:"6:45"
+          },
+          {
+              id:"duration",
+              key:"Duration",
+              value:"9 hours"
+          }
+        ]
     }
   ];
 class FirstPage extends React.Component {

@@ -44,9 +44,13 @@ const SECTIONS = [
   ];
 class FirstPage extends React.Component {
 
+    onUpdateSection = () =>{
+    }
+
     render(){
         return (
-            <Plank sections={SECTIONS}/>
+            <Plank sections={SECTIONS}
+            onUpdateSection={this.onUpdateSection}/>
         )
     }
 }

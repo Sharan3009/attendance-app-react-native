@@ -36,7 +36,6 @@ const scrollAccordion = (props) => {
                 renderContent={_renderContent}
                 onChange={props.onUpdateSection}
                 underlayColor="inherit"
-                disabled={props.disabled}
             />
         </ScrollView>
     )

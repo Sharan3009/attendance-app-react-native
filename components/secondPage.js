@@ -10,9 +10,14 @@ const SECTIONS = [
   ];
 class SecondPage extends React.Component {
 
+    onUpdateSection = (i) =>{
+        this.props.navigation.push("HistoryDetails")
+    }
+
     render(){
         return (
-            <Plank sections={SECTIONS} disabled={true}/>
+            <Plank sections={SECTIONS} 
+            onUpdateSection={this.onUpdateSection}/>
         )
     }
 }

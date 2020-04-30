@@ -8,6 +8,9 @@ class Plank extends React.Component {
     }
 
     onUpdateSection = activeSections => {
+        if(activeSections && activeSections.length){
+            this.props.onUpdateSection(activeSections[0])
+        }
         this.setState({ activeSections });
     };
 
@@ -21,8 +24,7 @@ class Plank extends React.Component {
                     <ScrollAccordion 
                     sections={this.props.sections}
                     activeSections={this.state.activeSections}
-                    onUpdateSection={this.onUpdateSection}
-                    disabled={this.props.disabled}/>
+                    onUpdateSection={this.onUpdateSection}/>
                 </View>
             </TouchableWithoutFeedback>
         )

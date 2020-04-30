@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
 import ScrollAccordion from './scrollAccordion';
 
-class Attendees extends React.Component {
+class Plank extends React.Component {
     state = {
         activeSections : []
     }
@@ -19,12 +19,14 @@ class Attendees extends React.Component {
             <TouchableWithoutFeedback onPress={this.onScrollViewPress}>
                 <View style={{flexGrow:1}}>
                     <ScrollAccordion 
+                    sections={this.props.sections}
                     activeSections={this.state.activeSections}
-                    onUpdateSection={this.onUpdateSection}/>
+                    onUpdateSection={this.onUpdateSection}
+                    disabled={this.props.disabled}/>
                 </View>
             </TouchableWithoutFeedback>
         )
     }
 }
 
-export default Attendees;
+export default Plank;

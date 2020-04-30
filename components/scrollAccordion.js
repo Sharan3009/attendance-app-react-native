@@ -1,20 +1,6 @@
 import React from 'react';
 import Accordion from 'react-native-collapsible/Accordion';
 import { View, Text, ScrollView } from 'react-native';
-const SECTIONS = [
-    {
-      name: 'Sharandeep Singh',
-      in: '2:45',
-      out: '3:45',
-      duration: '1 hour'
-    },
-    {
-        name: 'Bhopu Singh',
-        in: '9:45',
-        out: '6:45',
-        duration: '9 hours'
-    }
-  ];
 
 const _renderHeader = section => {
     return (
@@ -47,12 +33,13 @@ const scrollAccordion = (props) => {
         <ScrollView style={{flexGrow:1}}>
             <Accordion
                 style={{overflow:"scroll"}}
-                sections={SECTIONS}
+                sections={props.sections}
                 activeSections={props.activeSections}
                 renderHeader={_renderHeader}
                 renderContent={_renderContent}
                 onChange={props.onUpdateSection}
                 underlayColor="inherit"
+                disabled={props.disabled}
             />
         </ScrollView>
     )

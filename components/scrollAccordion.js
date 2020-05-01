@@ -13,9 +13,9 @@ const _renderHeader = section => {
 const _renderContent = section => {
     let returnUI = null;
     if(section && section.content && Array.isArray(section.content)){
-        returnUI = section.content.map((d)=>{
+        returnUI = section.content.map((d,idx)=>{
             return(
-                <View style={{paddingVertical:7, paddingHorizontal: 14, flexDirection:'row'}}>
+                <View style={{paddingVertical:7, paddingHorizontal: 14, flexDirection:'row'}} key={idx}>
                     <Text style={{fontWeight:'bold'}}>{d.key}: </Text><Text>{d.value}</Text>
                 </View>
             )

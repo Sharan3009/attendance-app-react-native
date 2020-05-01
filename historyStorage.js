@@ -1,7 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
 const KEY = "history"
-
 export const setHistory = (data) =>{
     return new Promise((resolve,reject)=>{
         if(typeof data === "object"){

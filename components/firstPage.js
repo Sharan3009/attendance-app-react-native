@@ -1,6 +1,7 @@
 import React from 'react';
 import Plank from './plank';
 import AddButton from './addButton';
+import { View,Text } from 'react-native';
 import { getHistory, setHistory } from '../historyStorage';
 import moment from 'moment';
 
@@ -87,16 +88,27 @@ class FirstPage extends React.Component {
         }
     }
 
+    showAptUI = () =>{
+        if(this.state.sections.length){
+            return <Plank 
+            setTime = {this.setTime.bind(this)}
+            sections={this.state.sections}
+            onUpdateSection={this.onUpdateSection}/>
+        } else {
+            return <View style={{justifyContent:"center",alignItems:"center",flex:1}}>
+                <Text>No attendance is captured for the day.</Text>
+                <Text>Try adding some using "+" icon.</Text>
+            </View>
+        }
+    }
+
     onUpdateSection = () =>{
     }
 
     render(){
         return (
             <>
-            <Plank 
-            setTime = {this.setTime.bind(this)}
-            sections={this.state.sections}
-            onUpdateSection={this.onUpdateSection}/>
+            {this.showAptUI()}
             <AddButton route={this.props.route}/>
             </>
         )

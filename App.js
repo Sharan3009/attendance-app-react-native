@@ -12,6 +12,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import FirstPage from './components/firstPage';
+import AddAttendeeForm from './components/addAttendeeForm';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ const App = () => {
       }}>
         <Stack.Screen name="Home" component={TabNavigation} />
         <Stack.Screen name="Details" component={FirstPage} options={({ route }) => ({ title: route.params.title })}/>
+        <Stack.Screen name="Add" component={AddAttendeeForm} />
       </Stack.Navigator>
   </NavigationContainer>
   )

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import SetTimeButton from './setTimeButton';
+import moment from 'moment';
 
 class AddAttendeeForm extends React.Component{
 
@@ -12,8 +13,21 @@ class AddAttendeeForm extends React.Component{
     }
 
     setTime(param,time){
-        console.log(param,time)
-        this.setState({[param]:time});
+        let formattedTime = moment(time).format("HH:mm")
+        this.setState({[param]:formattedTime});
+        this.setDuration();
+    }
+
+    setDuration=()=>{
+        const {inTime,outTime} = this.state;
+        if(inTime && outTime){
+            const momentOutTime = moment(outTime,"HH:mm");
+            const momentInTime = moment(inTime,"HH:mm");
+            let duration = moment.duration(momentOutTime.diff(momentInTime));
+            duration = duration.asHours().toFixed(2);
+            const prefix = (duration>1)?"hours":"hour"
+            this.setState({duration: `${duration} ${prefix}`});
+        }
     }
 
     onChangeText = (e) =>{

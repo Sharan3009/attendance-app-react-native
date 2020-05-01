@@ -36,6 +36,11 @@ class AddAttendeeForm extends React.Component{
     }
 
     addMember = () =>{
+        const route = this.props.route;
+        let day = moment().format("MM-DD-yyyy");;
+        if(route.params && route.params.day){
+            day = route.params.day
+        }
         getHistory()
         .then((data)=>{
             const {name,inTime,outTime,duration} = this.state;
@@ -60,10 +65,9 @@ class AddAttendeeForm extends React.Component{
                 ]
             }
             let storageData = data || {};
-            let today = moment().format("MM-DD-yyyy");
-            let todayData = storageData[today] || [];
-            todayData.push(newData);
-            storageData[today] = todayData;
+            let dayData = storageData[day] || [];
+            dayData.push(newData);
+            storageData[day] = dayData;
             setHistory(storageData).then(()=>{
                 this.props.navigation.goBack();
             })

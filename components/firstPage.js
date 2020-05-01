@@ -10,15 +10,19 @@ class FirstPage extends React.Component {
     };
 
     componentDidMount = () =>{
-        this.getTodayAttendance()
+        this.getDayAttendance()
     }
 
-    getTodayAttendance = () =>{
-        let today = moment().format("MM-DD-yyyy");
+    getDayAttendance = () =>{
+        const route = this.props.route;
+        let day = moment().format("MM-DD-yyyy");
+        if(route.params && route.params.title){
+            day = route.params.title;
+        }
         getHistory().then((data)=>{
-            let todayAttendance = data[today];
-            if(todayAttendance){
-                this.setState({sections:todayAttendance});
+            let dayAttendance = data[day];
+            if(dayAttendance){
+                this.setState({sections:dayAttendance});
             }
         })
     }
@@ -31,7 +35,7 @@ class FirstPage extends React.Component {
             <>
             <Plank sections={this.state.sections}
             onUpdateSection={this.onUpdateSection}/>
-            <AddButton />
+            <AddButton route={this.props.route}/>
             </>
         )
     }

@@ -3,6 +3,8 @@ import { TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const addButton = (props) => {
+    const params = props.route.params;
+    const day = (params)?params.title:null;
     const navigation = useNavigation();
     return(
         <TouchableOpacity
@@ -19,7 +21,7 @@ const addButton = (props) => {
             backgroundColor:'#633689',
             borderRadius:50,
           }}
-        onPress={()=>navigation.push("Add")}
+        onPress={()=>navigation.push("Add",{day})}
       >
         <Text style={{color:"#fff",fontSize:40,marginTop:-5}}>+</Text>
       </TouchableOpacity>

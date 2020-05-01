@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
+import SetTimeButton from './setTimeButton';
 
 class AddAttendeeForm extends React.Component{
 
@@ -8,6 +9,11 @@ class AddAttendeeForm extends React.Component{
         inTime:null,
         outTime:null,
         duration: "NA"
+    }
+
+    setTime(param,time){
+        console.log(param,time)
+        this.setState({[param]:time});
     }
 
     onChangeText = (e) =>{
@@ -25,13 +31,13 @@ class AddAttendeeForm extends React.Component{
                 />
                 <View style={{margin:5, flexDirection:"row", alignItems:"center"}}>
                     <Text style={{fontWeight:"bold"}}>In: </Text>
-                    <Text style={{marginRight:10}}>--:--</Text>
-                    <Button title="Set"/>
+                    <Text style={{marginRight:10}}>{this.state.inTime || '--:--'}</Text>
+                    <SetTimeButton setTime={(e)=>this.setTime("inTime",e)} />
                 </View>
                 <View style={{margin:5, flexDirection:"row", alignItems:"center"}}>
                     <Text style={{fontWeight:"bold"}}>Out: </Text>
-                    <Text style={{marginRight:10}}>--:--</Text>
-                    <Button title="Set"/>
+                    <Text style={{marginRight:10}}>{this.state.outTime || '--:--'}</Text>
+                    <SetTimeButton setTime={(e)=>this.setTime("outTime",e)} />
                 </View>
                 <View style={{margin:5, flexDirection:"row"}}>
                     <Text style={{fontWeight:"bold"}}>Duration: </Text>

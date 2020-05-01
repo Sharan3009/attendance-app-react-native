@@ -5,7 +5,7 @@ import AccordionContent from './accordionContent';
 
 const _renderHeader = section => {
     return (
-        <View style={{ paddingVertical:7, paddingHorizontal: 10, backgroundColor:'rgba(0,0,0,0.03)', borderBottomColor:'rgba(0,0,0,.125)', borderBottomWidth:1}}>
+        <View style={{ paddingVertical:15, paddingHorizontal: 15, backgroundColor:'rgba(0,0,0,0.03)', borderBottomColor:'rgba(0,0,0,.125)', borderBottomWidth:1}}>
             <Text style={{fontSize:20}}>{section.header}</Text>
         </View>
     );

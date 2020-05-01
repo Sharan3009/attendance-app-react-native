@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, TextInput, Button } from 'react-native';
 import { getHistory, setHistory } from '../historyStorage';
-import SetTimeButton from './setTimeButton';
 import moment from 'moment';
+import AccordionContent from './accordionContent';
 
 class AddAttendeeForm extends React.Component{
 
@@ -10,13 +10,42 @@ class AddAttendeeForm extends React.Component{
         name:null,
         inTime:null,
         outTime:null,
-        duration: "NA"
+        duration: "NA",
     }
 
     setTime(param,time){
         let formattedTime = moment(time).format("HH:mm")
         this.setState({[param]:formattedTime});
         this.setDuration();
+    }
+
+    getMemberData =() =>{
+        const {name,inTime,outTime,duration} = this.state;
+        return {
+            header : name,
+            content : [
+                {
+                    id: "inTime",
+                    key: "In",
+                    value: inTime,
+                    default: "--:--",
+                    isTime:true
+                },
+                {
+                    id: "outTime",
+                    key: "Out",
+                    value: outTime,
+                    default: "--:--",
+                    isTime:true
+                },
+                {
+                    id: "duration",
+                    key: "Duration",
+                    value: duration,
+                    default: "NA"
+                }
+            ]
+        }
     }
 
     setDuration=()=>{
@@ -43,27 +72,7 @@ class AddAttendeeForm extends React.Component{
         }
         getHistory()
         .then((data)=>{
-            const {name,inTime,outTime,duration} = this.state;
-            let newData = {
-                header : name,
-                content : [
-                    {
-                        id: "in",
-                        key: "In",
-                        value: inTime
-                    },
-                    {
-                        id: "out",
-                        key: "Out",
-                        value: outTime
-                    },
-                    {
-                        id: "duration",
-                        key: "Duration",
-                        value: duration
-                    }
-                ]
-            }
+            let newData = this.getMemberData();
             let storageData = data || {};
             let dayData = storageData[day] || [];
             dayData.push(newData);
@@ -93,20 +102,7 @@ class AddAttendeeForm extends React.Component{
                     onChangeText={this.onChangeText}
                     value={this.state.name}
                 />
-                <View style={{margin:5, flexDirection:"row", alignItems:"center"}}>
-                    <Text style={{fontWeight:"bold"}}>In: </Text>
-                    <Text style={{marginRight:10}}>{this.state.inTime || '--:--'}</Text>
-                    <SetTimeButton setTime={(e)=>this.setTime("inTime",e)} />
-                </View>
-                <View style={{margin:5, flexDirection:"row", alignItems:"center"}}>
-                    <Text style={{fontWeight:"bold"}}>Out: </Text>
-                    <Text style={{marginRight:10}}>{this.state.outTime || '--:--'}</Text>
-                    <SetTimeButton setTime={(e)=>this.setTime("outTime",e)} />
-                </View>
-                <View style={{margin:5, flexDirection:"row"}}>
-                    <Text style={{fontWeight:"bold"}}>Duration: </Text>
-                    <Text>{this.state.duration}</Text>
-                </View>
+                <AccordionContent section={this.getMemberData()} setTime={this.setTime.bind(this)}/>
                 <View style={{margin:5}}>
                     <Button title="Add member" color="#633689" onPress={this.addMember} disabled={this.isButtonDisable()} />
                 </View>

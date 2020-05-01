@@ -1,6 +1,7 @@
 import React from 'react';
 import Accordion from 'react-native-collapsible/Accordion';
 import { View, Text, ScrollView } from 'react-native';
+import AccordionContent from './accordionContent';
 
 const _renderHeader = section => {
     return (
@@ -10,20 +11,12 @@ const _renderHeader = section => {
     );
 };
 
+const setTime = () =>{
+
+}
+
 const _renderContent = section => {
-    let returnUI = null;
-    if(section && section.content && Array.isArray(section.content)){
-        returnUI = section.content.map((d,idx)=>{
-            return(
-                <View style={{paddingVertical:7, paddingHorizontal: 14, flexDirection:'row'}} key={idx}>
-                    <Text style={{fontWeight:'bold'}}>{d.key}: </Text><Text>{d.value}</Text>
-                </View>
-            )
-        })
-    }
-    return (
-        returnUI
-    );
+    return <AccordionContent section={section} setTime={setTime}/>
 };
 const scrollAccordion = (props) => {
     return(

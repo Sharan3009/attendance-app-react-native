@@ -1,49 +1,27 @@
 import React from 'react';
 import Plank from './plank';
 import AddButton from './addButton';
-const SECTIONS = [
-    {
-      header: 'Sharandeep Singh',
-      content : [
-          {
-              id:"in",
-              key:"In",
-              value:"2:45"
-          },
-          {
-            id:"out",
-            key:"Out",
-            value:"3:45"
-        },
-        {
-            id:"duration",
-            key:"Duration",
-            value:"1 hour"
-        }
-      ]
-    },
-    {
-        header: 'Bhopu Singh',
-        content : [
-            {
-                id:"in",
-                key:"In",
-                value:"9:45"
-            },
-            {
-              id:"out",
-              key:"Out",
-              value:"6:45"
-          },
-          {
-              id:"duration",
-              key:"Duration",
-              value:"9 hours"
-          }
-        ]
-    }
-  ];
+import { getHistory } from '../historyStorage';
+import moment from 'moment';
+
 class FirstPage extends React.Component {
+    state = {
+        sections : []
+    };
+
+    componentDidMount = () =>{
+        this.getTodayAttendance()
+    }
+
+    getTodayAttendance = () =>{
+        let today = moment().format("MM-DD-yyyy");
+        getHistory().then((data)=>{
+            let todayAttendance = data[today];
+            if(todayAttendance){
+                this.setState({sections:todayAttendance});
+            }
+        })
+    }
 
     onUpdateSection = () =>{
     }
@@ -51,7 +29,7 @@ class FirstPage extends React.Component {
     render(){
         return (
             <>
-            <Plank sections={SECTIONS}
+            <Plank sections={this.state.sections}
             onUpdateSection={this.onUpdateSection}/>
             <AddButton />
             </>

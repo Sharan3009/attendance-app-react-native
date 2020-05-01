@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TextInput, Button, AsyncStorage } from 'react-native';
+import { View, Text, TextInput, Button } from 'react-native';
+import { getHistory, setHistory } from '../historyStorage';
 import SetTimeButton from './setTimeButton';
 import moment from 'moment';
 
@@ -35,7 +36,48 @@ class AddAttendeeForm extends React.Component{
     }
 
     addMember = () =>{
-        console.log(this.state)
+        getHistory()
+        .then((data)=>{
+            const {name,inTime,outTime,duration} = this.state;
+            let newData = {
+                header : name,
+                content : [
+                    {
+                        id: "in",
+                        key: "In",
+                        value: inTime
+                    },
+                    {
+                        id: "out",
+                        key: "Out",
+                        value: outTime
+                    },
+                    {
+                        id: "duration",
+                        key: "Duration",
+                        value: duration
+                    }
+                ]
+            }
+            let storageData = data || {};
+            let today = moment().format("MM-DD-yyyy");
+            let todayData = storageData[today] || [];
+            todayData.push(newData);
+            storageData[today] = todayData;
+            setHistory(storageData).then(()=>{
+                this.props.navigation.goBack();
+            })
+        })
+    }
+
+    isButtonDisable = () =>{
+        const {name,inTime} = this.state;
+        if(!name || (name && !name.trim())){
+            return true;
+        } else if (!inTime || (inTime && !inTime.trim())){
+            return true;
+        }
+        return false;
     }
 
     render(){
@@ -62,7 +104,7 @@ class AddAttendeeForm extends React.Component{
                     <Text>{this.state.duration}</Text>
                 </View>
                 <View style={{margin:5}}>
-                    <Button title="Add member" color="#633689" onPress={this.addMember} />
+                    <Button title="Add member" color="#633689" onPress={this.addMember} disabled={this.isButtonDisable()} />
                 </View>
             </View>
         )

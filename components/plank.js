@@ -7,6 +7,10 @@ class Plank extends React.Component {
         activeSections : []
     }
 
+    setTime=(param,time,i)=>{
+        this.props.setTime(param,time,i)
+    }
+
     onUpdateSection = activeSections => {
         if(activeSections && activeSections.length){
             this.props.onUpdateSection(activeSections[0])
@@ -22,6 +26,7 @@ class Plank extends React.Component {
             <TouchableWithoutFeedback onPress={this.onScrollViewPress}>
                 <View style={{flexGrow:1}}>
                     <ScrollAccordion 
+                    setTime={this.setTime.bind(this)}
                     sections={this.props.sections}
                     activeSections={this.state.activeSections}
                     onUpdateSection={this.onUpdateSection}/>

@@ -10,7 +10,18 @@ class FirstPage extends React.Component {
     };
 
     componentDidMount = () =>{
-        this.getDayAttendance()
+        this.getDayAttendance();
+        this.navigationFocusEvent("addListener");
+    }
+
+    componentWillUnmount = () =>{
+        this.navigationFocusEvent("removeListener");
+    }
+
+    navigationFocusEvent = (fun) =>{
+        this.props.navigation[fun]("focus",()=>{
+            this.getDayAttendance();
+        })
     }
 
     getDayAttendance = () =>{

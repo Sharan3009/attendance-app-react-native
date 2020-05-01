@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, AsyncStorage } from 'react-native';
 import SetTimeButton from './setTimeButton';
 import moment from 'moment';
 
@@ -34,6 +34,10 @@ class AddAttendeeForm extends React.Component{
         this.setState({name:e});
     }
 
+    addMember = () =>{
+        console.log(this.state)
+    }
+
     render(){
         return (
             <View>
@@ -58,7 +62,7 @@ class AddAttendeeForm extends React.Component{
                     <Text>{this.state.duration}</Text>
                 </View>
                 <View style={{margin:5}}>
-                    <Button title="Add member" color="#633689" />
+                    <Button title="Add member" color="#633689" onPress={this.addMember} />
                 </View>
             </View>
         )

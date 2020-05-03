@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-native';
+import { Button,Modal,View } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 class SetTimeButton extends React.Component{
@@ -20,16 +20,21 @@ class SetTimeButton extends React.Component{
     }
 
     render(){
-        let dateTimePicker = null;
-        if(this.state.isTimePicker){
-            dateTimePicker = <DateTimePicker
-            value={new Date()}
-            mode={"time"}
-            is24Hour={true}
-            display="default"
-            onChange={this.onTimeChange}
-          />
-        }
+            let dateTimePicker = <Modal
+                visible={this.state.isTimePicker}
+                animationType={"fade"}
+                transparent={true}>
+                    <View style={{height:"100%",justifyContent:"center",alignItems:"center", backgroundColor: "rgba(0,0,0,0.5)"}}>
+                        <DateTimePicker
+                        style={{width:'70%',backgroundColor:"white"}}
+                        value={new Date()}
+                        mode={"time"}
+                        is24Hour={true}
+                        display="default"
+                        onChange={this.onTimeChange}
+                    />
+                    </View>
+                </Modal>
         return (
             <>
             <Button title="Set" onPress={this.showTimePicker}/>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button,Modal,View } from 'react-native';
+import { Button, Platform, Modal } from 'react-native';
 import DatePicker from './datePicker';
 
 class SetTimeButton extends React.Component{
@@ -23,11 +23,24 @@ class SetTimeButton extends React.Component{
         }
     }
 
+    getDatePickerUI = () => {
+        if(Platform.OS === "ios"){
+            return <Modal visible={this.state.isTimePicker} animationType={"fade"} transparent={true}>
+                <DatePicker onChange={this.onTimeChange} onClose={this.hideTimePicker}/>
+            </Modal>
+        } else {
+            if(this.state.isTimePicker){
+                return <DatePicker onChange={this.onTimeChange} onClose={this.hideTimePicker}/>
+            }
+            return null;
+        }
+    }
+
     render(){
         return (
             <>
             <Button title="Set" onPress={this.showTimePicker}/>
-            {this.state.isTimePicker && <DatePicker onChange={this.onTimeChange} onClose={this.hideTimePicker}/>}
+            {this.getDatePickerUI()}
           </>
         )
     }

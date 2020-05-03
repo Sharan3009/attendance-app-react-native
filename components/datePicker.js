@@ -23,21 +23,36 @@ const styles = StyleSheet.create({
 
 class DatePicker extends React.Component {
   
+  state = {
+    timePicked:new Date()
+  }
+
+  onTimerChange = (e) =>{
+    if(e && e.nativeEvent && e.nativeEvent.timestamp){
+      const timePicked = new Date(e.nativeEvent.timestamp);
+      if(Platform.OS === "ios"){
+        this.setState({timePicked});
+      } else {
+        this.props.onChange(timePicked)
+      }
+    }
+  }
+
   render() {
     return (
       <TouchableOpacity onPress={this.props.onClose} style={styles.container}>
         {Platform.OS === 'ios' && (
           <View style={styles.header}>
-            <TouchableOpacity onPress={this.props.onClose}>
-              <Text>Cancel</Text>
+            <TouchableOpacity onPress={()=>this.props.onChange(this.state.timePicked)}>
+              <Text style={{fontWeight:"bold", color:"blue"}}>Done</Text>
             </TouchableOpacity>
           </View>
         )}
         <DateTimePicker
-          value={new Date()}
+          value={this.state.timePicked}
           mode="time"
           display="default"
-          onChange={this.props.onChange}
+          onChange={this.onTimerChange}
           is24Hour={true}
          style={{ backgroundColor: 'white' }}
        />

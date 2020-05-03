@@ -16,10 +16,10 @@ class SetTimeButton extends React.Component{
         this.setState({isTimePicker:false});
     }
 
-    onTimeChange = (e) =>{
-        if(e.nativeEvent && e.nativeEvent.timestamp){
+    onTimeChange = (time) =>{
+        if(time){
             this.setState({isTimePicker:false})
-            this.props.setTime(e.nativeEvent.timestamp);
+            this.props.setTime(time);
         }
     }
 

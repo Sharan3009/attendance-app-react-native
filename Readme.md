@@ -60,5 +60,4 @@
 * Click on `Environment Variables` option.
 * Under `User variables` you will see a variable called `Path`.
 * Edit the path value and add two more values i.e `C:\Users\{username}\AppData\Local\Android\Sdk\emulator\` for the emulator and `C:\Users\{username}\AppData\Local\Android\Sdk\platform-tools\` for the adb.
-* Now open the `emulator` from the VS code.
 * Once its up and running, run the command from project folder `npm run android` or `react-native run-android`. This will work only if the Path's mentioned are all setup.

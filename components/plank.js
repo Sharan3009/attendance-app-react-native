@@ -12,13 +12,14 @@ class Plank extends React.Component {
     }
 
     onUpdateSection = activeSections => {
-        if(activeSections && activeSections.length){
-            this.props.onUpdateSection(activeSections[0])
+        if(activeSections){
+            this.props.onUpdateSection(activeSections[0]);
+            this.setState({ activeSections });
         }
-        this.setState({ activeSections });
     };
 
     onScrollViewPress = () => {
+        console.log('empty')
         this.onUpdateSection([]);
     }
     render(){

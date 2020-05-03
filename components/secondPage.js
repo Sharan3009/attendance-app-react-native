@@ -3,6 +3,7 @@ import Plank from './plank';
 import { getHistory } from '../historyStorage';
 import { View, Text } from 'react-native';
 class SecondPage extends React.Component {
+    plank;
     state = {
         sections : []
     }
@@ -31,17 +32,26 @@ class SecondPage extends React.Component {
     }
 
     onUpdateSection = (i) =>{
-        const {sections} = this.state;
-        let header = null;
-        if(sections[i]){
-            header = sections[i].header
+        if(i!=null){
+            // this is a hack to close the accordion when visited so that the user doesnt have to tap twice to open it
+            setTimeout(()=>{
+                if(this.plank){
+                    // reseting all the accordions to closed
+                    this.plank.onScrollViewPress();
+                }
+            })
+            const {sections} = this.state;
+            let header = null;
+            if(sections[i]){
+                header = sections[i].header
+            }
+            this.props.navigation.push("Details",{title:header});
         }
-        this.props.navigation.push("Details",{title:header});
     }
 
     showAptUI = () =>{
         if(this.state.sections.length){
-            return <Plank sections={this.state.sections} 
+            return <Plank ref={(c)=>this.plank=c} sections={this.state.sections} 
             onUpdateSection={this.onUpdateSection}/>
         } else {
             return <View style={{justifyContent:"center",alignItems:"center",flex:1}}>

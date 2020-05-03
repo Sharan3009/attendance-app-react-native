@@ -25,7 +25,7 @@ class SecondPage extends React.Component {
     getAllDates = () =>{
         getHistory().then((data)=>{
             if(data){
-                let sections = Object.keys(data).map((date)=>({header:date}));
+                let sections = Object.keys(data).map((date)=>({header:date})).sort((a,b)=>b.localeCompare(a));
                 this.setState({sections})
             }
         })

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button,Modal,View } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DatePicker from './datePicker';
 
 class SetTimeButton extends React.Component{
 
@@ -12,6 +12,10 @@ class SetTimeButton extends React.Component{
         this.setState({isTimePicker:true});
     }
 
+    hideTimePicker = () =>{
+        this.setState({isTimePicker:false});
+    }
+
     onTimeChange = (e) =>{
         if(e.nativeEvent && e.nativeEvent.timestamp){
             this.setState({isTimePicker:false})
@@ -20,25 +24,10 @@ class SetTimeButton extends React.Component{
     }
 
     render(){
-            let dateTimePicker = <Modal
-                visible={this.state.isTimePicker}
-                animationType={"fade"}
-                transparent={true}>
-                    <View style={{height:"100%",justifyContent:"center",alignItems:"center", backgroundColor: "rgba(0,0,0,0.5)"}}>
-                        <DateTimePicker
-                        style={{width:'70%',backgroundColor:"white"}}
-                        value={new Date()}
-                        mode={"time"}
-                        is24Hour={true}
-                        display="default"
-                        onChange={this.onTimeChange}
-                    />
-                    </View>
-                </Modal>
         return (
             <>
             <Button title="Set" onPress={this.showTimePicker}/>
-            {dateTimePicker}
+            {this.state.isTimePicker && <DatePicker onChange={this.onTimeChange} onClose={this.hideTimePicker}/>}
           </>
         )
     }

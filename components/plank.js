@@ -19,7 +19,6 @@ class Plank extends React.Component {
     };
 
     onScrollViewPress = () => {
-        console.log('empty')
         this.onUpdateSection([]);
     }
     render(){

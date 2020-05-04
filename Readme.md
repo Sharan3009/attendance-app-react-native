@@ -55,6 +55,8 @@
 
 ### Making build of react-native to check if everything works fine (IOS).
 - run the command `react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios`
+- change `Debug` in `<AnalyzeAction buildConfiguration = "Debug"> </AnalyzeAction>` to `Release`
+- run `xcodebuild`
 
 # Debugging
 

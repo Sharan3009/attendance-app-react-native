@@ -2,7 +2,7 @@
 
 ### React Native setup
 
-* `npm install -g react-native`
+* `npm install -g react-native-cli`
 * `react-native init projectName`
 
 
@@ -46,11 +46,15 @@
 * It will show you your emulators list and select that. This will open and run the emulated device.
 
 
-### Making build of react-native to check if everything works fine.
+### Making build of react-native to check if everything works fine (Android).
 
 * Go to the react-native project directory from terminal. From there `cd android`
 * try making the build first, by executing `gradlew assembleRelease`. If everything works fine it means setup is completed. If it throws error related to licensing then you can go to the `tools` folder in `Sdk` and from there run the command `sdkmanager --licenses`. This will accept all the licenses through a process. (This will work for Jdk 8 only, Jdk 11 has removed the modules support and will not work).
 
+
+
+### Making build of react-native to check if everything works fine (IOS).
+- run the command `react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios`
 
 # Debugging
 

@@ -28,12 +28,21 @@ class DatePicker extends React.Component {
   }
 
   onTimerChange = (e) =>{
-    if(e && e.nativeEvent && e.nativeEvent.timestamp){
-      const timePicked = new Date(e.nativeEvent.timestamp);
-      if(Platform.OS === "ios"){
-        this.setState({timePicked});
-      } else {
-        this.props.onChange(timePicked)
+    switch(e.type){
+      case "set":{
+        if(e && e.nativeEvent && e.nativeEvent.timestamp){
+          const timePicked = new Date(e.nativeEvent.timestamp);
+          if(Platform.OS === "ios"){
+            this.setState({timePicked});
+          } else {
+            this.props.onChange(timePicked)
+          }
+        }
+        break;
+      }
+      case "dismissed":{
+        this.props.onClose();
+        break;
       }
     }
   }
